@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitansh Sharma - Cloud Evangelist & Community Leader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Warm Neutral with Google Accents" - A calming and professional palette with a light background (subtle gradient), dark text for readability (text-gray-800), and subtle accents using the four Google colors (blue, green, yellow, red) in skill badges for categorization and visual interest. -->
+    <!-- Application Structure Plan: A single-page, top-to-bottom narrative structure was chosen to guide the user through a story. It starts with a strong introduction (Hero), presents hard evidence of impact (Impact Dashboard), details the leadership behind the numbers (Leadership), showcases the foundational knowledge (Skills), and ends with a clear call to action (Connect). This linear flow is intuitive and ensures the user understands the depth and breadth of experience without getting lost. Key interaction is the dynamic chart in the Impact section, allowing for a quick, visual grasp of achievements. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Facilitator program statistics (students, badges). Goal: Compare impact across cohorts. Viz/Presentation Method: Interactive Bar Chart (Chart.js). Interaction: Tooltips on hover provide exact numbers. Justification: A bar chart is excellent for direct comparison of discrete numbers, making the growth in impact immediately obvious.
+        - Report Info: Leadership roles (GDSC, Seminar, Open Source). Goal: Organize and detail leadership experience. Viz/Presentation Method: Card-based layout with structured HTML/Tailwind. Interaction: N/A. Justification: Cards provide clear separation and allow for detailed descriptions without cluttering the page. GSSOC'2024 success added to the Open Source section.
+        - Report Info: Technical skills and certifications. Goal: Inform about technical capabilities. Viz/Presentation Method: Tag-style list using styled HTML/Tailwind with Google-themed colors. Interaction: N/A. Justification: Tags are a modern, scannable way to present a list of skills, making it easy for recruiters to quickly assess capabilities, now visually categorized by color.
+        - Report Info: YouTube/Social media presence. Goal: Inform about communication skills. Viz/Presentation Method: Stat cards with icons. Interaction: N/A. Justification: Highlights key metrics in a visually engaging and easily digestible format.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f9fafb, #f0f4f8); /* Subtle gradient */
+            background-attachment: fixed; /* Ensures gradient covers full page even on scroll */
+            color: #1f2937; /* Dark text for readability */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-900">Hitansh Sharma</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#impact" class="nav-link text-gray-600 font-medium">Impact</a>
+                <a href="#leadership" class="nav-link text-gray-600 font-medium">Leadership</a>
+                <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
+                <a href="#connect" class="nav-link text-gray-600 font-medium">Connect</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                     <span class="text-3xl">&#9776;</span>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#impact" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Impact</a>
+            <a href="#leadership" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Leadership</a>
+            <a href="#skills" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Skills</a>
+            <a href="#connect" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Connect</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">Hitansh Sharma <span class="text-blue-600">☁️</span></h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Final Year CSE Student (AI/ML) & Cloud Evangelist</p>
+                <p class="mt-6 text-xl md:text-2xl text-blue-600 font-semibold max-w-4xl mx-auto">Passionately connecting students with cutting-edge Google Cloud technologies and building vibrant tech communities.</p>
+            </div>
+        </section>
+
+        <section id="impact" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Proven Impact: Leading the Google Cloud Arcade</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">As a two-time facilitator for the Google Cloud Arcade program, I've had the privilege of guiding thousands of students on their cloud learning journey. My focus has always been on driving engagement, fostering a supportive community, and achieving tangible results, as demonstrated by the milestones reached by our cohorts.</p>
+                <div class="chart-container">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="leadership" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Beyond the Arcade: Leadership & Community Building</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">My passion for technology extends beyond individual learning. I actively seek opportunities to build and lead communities, fostering environments where students can learn, collaborate, and grow their technical skills together.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-4">Former Head of GDSC</h3>
+                        <p class="text-gray-700">As the former head of the Google Developer Student Club at my university, I led numerous initiatives to promote tech learning. My role involved strategic planning, team management, and creating a calendar of events that provided students with hands-on experience in various technologies, directly contributing to a more skilled and engaged campus tech community.</p>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-4">Campus-Wide Web Dev Seminar</h3>
+                        <p class="text-gray-700">Identifying a need for practical web development knowledge, I organized and led a campus-wide seminar. This involved everything from curriculum planning and securing expert speakers to marketing and event execution. The seminar was a major success, providing valuable, hands-on learning to a large and engaged student audience.</p>
+                    </div>
+                </div>
+                 <div class="mt-8 bg-gray-50 p-8 rounded-xl shadow-md text-center">
+                    <h3 class="text-2xl font-bold mb-2">Open Source & Mentorship</h3>
+                    <p class="text-gray-700">I am a firm believer in giving back to the community. I actively contribute to open-source projects, including successfully completing **GSSOC'2024**, and dedicate time to mentoring junior students, helping them navigate technical challenges in their coursework and personal projects.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Technical Prowess & Cloud Expertise</h2>
+                 <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">A strong technical foundation is essential for effective leadership and mentorship. I continuously work on honing my skills across programming, cloud platforms, and problem-solving to stay at the forefront of technology.</p>
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Core Technologies & Languages</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Python</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">C++</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">HTML</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">CSS</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">JavaScript</span>
+                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">LeetCode</span>
+                        </div>
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Cloud Platforms & Expertise</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Google Cloud (GCP)</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Amazon Web Services (AWS)</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">BigQuery</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Cloud SQL</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Dataproc</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Docker</span>
+                            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Kubernetes</span>
+                        </div>
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Web Development & Other Skills</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">Flutter</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">MERN Stack</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">Node.js</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">Git/GitHub</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">DevOps</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">SEO</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">DSA</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-center">Certifications</h3>
+                        <p class="text-center text-gray-700 font-medium bg-red-100 text-red-800 p-4 rounded-lg">Coursera Professional Certificate: Preparing for Google Cloud Certification: Cloud Data Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="connect" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title">Engaging Communication & Outreach</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Building a community requires more than just technical skill; it requires effective communication. I leverage social media and content creation to reach a broad audience, explain complex concepts, and inspire others to join the world of tech.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+                     <div class="bg-gray-100 p-6 rounded-lg shadow">
+                        <p class="text-4xl font-bold text-blue-600">50k+</p>
+                        <p class="mt-2 text-gray-700">Total YouTube Subscribers</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow">
+                        <p class="text-4xl font-bold text-blue-600">5M+</p>
+                        <p class="mt-2 text-gray-700">Total Channel Views</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg shadow">
+                        <p class="text-4xl font-bold text-blue-600">Active</p>
+                        <p class="mt-2 text-gray-700">on LinkedIn, Twitter & WhatsApp</p>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Let's Connect & Innovate!</h2>
+                <p class="text-gray-600 mb-8">I'm always open to discussing technology, community building, or potential collaborations.</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="#hitanshsharma25@gmail.com" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Email</a>
+                    <a href="www.linkedin.com/in/hitansh-sharma" class="text-blue-600 hover:text-blue-800 font-bold text-lg">LinkedIn</a>
+                    <a href="https://x.com/HitanshSharma25" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Twitter</a>
+                    <a href="https://www.cloudskillsboost.google/public_profiles/e7586d1c-a1ba-4a24-a919-f437720199ad" class="text-blue-600 hover:text-blue-800 font-bold text-lg">Skills Boost Profile</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Hitansh Sharma. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        const ctx = document.getElementById('impactChart').getContext('2d');
+        const impactChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Students Supported', 'Skill Badges Completed'],
+                datasets: [{
+                    label: '2024 Cohort',
+                    data: [1700, 0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '2025 Cohort 1',
+                    data: [3500, 6200],
+                    backgroundColor: 'rgba(22, 163, 74, 0.5)',
+                    borderColor: 'rgba(22, 163, 74, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Google Cloud Arcade Facilitator Impact',
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('en-US').format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return new Intl.NumberFormat('en-US', { notation: 'compact', compactDisplay: 'short' }).format(value);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
